@@ -10,12 +10,12 @@ import Foundation
 
 class PicturesListTableVM {
 
-    var pictures: [Picture] = []
-    var listOffset = 0
+    fileprivate let pictureController: PictureControllerProtocol
+    private(set) var listOffset = 0
     private(set) var listShorterThanExpected = false
-    var numberOfPictures: Int?
 
-    let pictureController: PictureControllerProtocol
+    var pictures: [Picture] = []
+    var numberOfPictures: Int?
 
     init (pictureController: PictureControllerProtocol = PictureController()) {
         self.pictureController = pictureController

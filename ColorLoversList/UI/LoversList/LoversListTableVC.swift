@@ -60,7 +60,9 @@ class LoversListTableVC: UITableViewController {
             fetchEntries()
         }
     }
-    
+
+    // MARK: - Table view delegate
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: LoversListTableVC.TableCellReusableName, for: indexPath)
@@ -68,7 +70,12 @@ class LoversListTableVC: UITableViewController {
         cell.detailTextLabel?.text = viewModel.loverDetails(index: indexPath.row)
         return cell
     }
-    
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -80,11 +87,6 @@ class LoversListTableVC: UITableViewController {
 
         destinationVC.lover = viewModel.lovers[indexPath.row]
         destinationVC.pictureType = PictureType(rawValue: pictureTypeSegmentedControl.selectedSegmentIndex)
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

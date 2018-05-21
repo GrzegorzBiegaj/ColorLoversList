@@ -16,8 +16,6 @@ class PictureVC: UIViewController {
     
     fileprivate var imageView: UIImageView?
     
-    // MARK: Controllers
-    
     fileprivate lazy var imageController: ImageController = ImageController()
     
     // MARK: App life cycle

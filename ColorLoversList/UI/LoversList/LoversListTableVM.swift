@@ -10,11 +10,10 @@ import Foundation
 
 class LoversListTableVM {
 
-    var listOffset = 0
-    
-    var lovers: [Lover] = []
+    fileprivate let loverController: LoverControllerProtocol
 
-    let loverController: LoverControllerProtocol
+    private(set) var listOffset = 0
+    var lovers: [Lover] = []
 
     init (loverController: LoverControllerProtocol = LoverController()) {
         self.loverController = loverController
