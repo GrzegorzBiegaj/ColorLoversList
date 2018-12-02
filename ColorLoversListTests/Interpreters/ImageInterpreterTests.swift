@@ -17,7 +17,7 @@ class ImageInterpreterTests: XCTestCase {
         let successStatusCode = 200
         
         let image = UIImage.imageWithColor(color: .red, size: CGSize(width: 100, height: 100))
-        let data = UIImagePNGRepresentation(image)
+        let data = image.pngData()
         
         let imageInterpreter = ImageInterpreter()
         let resp = imageInterpreter.interpret(data: data, response: response, error: nil, successStatusCode: successStatusCode)

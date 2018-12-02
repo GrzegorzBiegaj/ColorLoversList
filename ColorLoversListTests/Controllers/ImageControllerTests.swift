@@ -16,7 +16,7 @@ class ImageControllerTests: XCTestCase {
         let response = HTTPURLResponse(url: URL(string: "test")!, statusCode: 200, httpVersion: nil, headerFields: nil)
         
         let image = UIImage.imageWithColor(color: .red, size: CGSize(width: 100, height: 100))
-        let data = UIImagePNGRepresentation(image)
+        let data = image.pngData()
         
         let imageController = ImageController(connection: NetworkingMock(data: data, error: nil, response: response))
         imageController.image(url: "image") { (resp) in
