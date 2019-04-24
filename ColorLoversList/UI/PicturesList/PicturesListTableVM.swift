@@ -21,7 +21,7 @@ class PicturesListTableVM {
         self.pictureController = pictureController
     }
 
-    func fetchEntries(userName: String, pictureType: PictureType, handler: @escaping (Response<[Picture], ResponseError>) -> ()) {
+    func fetchEntries(userName: String, pictureType: PictureType, handler: @escaping (Result<[Picture], ResponseError>) -> ()) {
 
         pictureController.pictures(offset: listOffset, userName: userName, pictureType: pictureType) { (response) in
             switch response {
@@ -33,8 +33,8 @@ class PicturesListTableVM {
                 self.listOffset += self.pictureController.numberOfElements
                 self.pictures = pictures
                 handler(.success(self.pictures))
-            case .error(let error):
-                handler(.error(error))
+            case .failure(let error):
+                handler(.failure(error))
             }
         }
     }

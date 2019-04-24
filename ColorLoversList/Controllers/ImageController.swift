@@ -18,7 +18,7 @@ class ImageController {
         self.connection = connection
     }
     
-    func image(url: String, handler: @escaping (Response<UIImage, ResponseError>) -> ()) {
+    func image(url: String, handler: @escaping (Result<UIImage, ResponseError>) -> ()) {
         
         let request = ImagesRequest(url: url)
         
@@ -28,8 +28,8 @@ class ImageController {
             case .success(let image):
                 self.addImageToCache(image: image, url: url)
                 handler(response)
-            case .error(let error):
-                handler(.error(error))
+            case .failure(let error):
+                handler(.failure(error))
             }
         }
     }

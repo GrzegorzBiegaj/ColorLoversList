@@ -13,14 +13,14 @@ class PictureControllerMock: PictureControllerProtocol {
 
     var numberOfElements: Int
     var pictures: [Picture] = []
-    var response: Response<[Picture], ResponseError>
+    var response: Result<[Picture], ResponseError>
 
-    init (response: Response<[Picture], ResponseError>, numberOfElements: Int = 10) {
+    init (response: Result<[Picture], ResponseError>, numberOfElements: Int = 10) {
         self.response = response
         self.numberOfElements = numberOfElements
     }
 
-    func pictures(offset: Int, userName: String, pictureType: PictureType, handler: @escaping (Response<[Picture], ResponseError>) -> ()) {
+    func pictures(offset: Int, userName: String, pictureType: PictureType, handler: @escaping (Result<[Picture], ResponseError>) -> ()) {
         handler(response)
     }
 

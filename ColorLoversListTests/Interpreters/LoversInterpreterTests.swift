@@ -32,7 +32,7 @@ class LoversInterpreterTests: XCTestCase {
         switch resp {
         case .success(let data):
             XCTAssertEqual(data, lovers)
-        case .error(_):
+        case .failure(_):
             XCTFail()
         }
     }
@@ -46,7 +46,7 @@ class LoversInterpreterTests: XCTestCase {
         switch resp {
         case .success(_):
             XCTFail()
-        case .error(let responseError):
+        case .failure(let responseError):
             XCTAssertEqual(responseError, ResponseError.invalidResponseError)
         }
     }
@@ -62,7 +62,7 @@ class LoversInterpreterTests: XCTestCase {
         switch resp {
         case .success(_):
             XCTFail()
-        case .error(let responseError):
+        case .failure(let responseError):
             XCTAssertEqual(responseError, ResponseError.connectionError)
         }
     }

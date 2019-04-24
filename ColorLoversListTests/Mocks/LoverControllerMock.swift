@@ -14,13 +14,13 @@ class LoverControllerMock: LoverControllerProtocol {
     var numberOfElements = 10
     var lovers: [Lover] = []
     var connection: RequestConnectionProtocol = NetworkingMock()
-    var response: Response<[Lover], ResponseError>
+    var response: Result<[Lover], ResponseError>
 
-    init (response: Response<[Lover], ResponseError>) {
+    init (response: Result<[Lover], ResponseError>) {
         self.response = response
     }
 
-    func lovers(offset: Int, handler: @escaping (Response<[Lover], ResponseError>) -> ()) {
+    func lovers(offset: Int, handler: @escaping (Result<[Lover], ResponseError>) -> ()) {
         handler(response)
     }
 

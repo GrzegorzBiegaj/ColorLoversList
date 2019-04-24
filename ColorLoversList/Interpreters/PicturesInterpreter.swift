@@ -10,13 +10,13 @@ import Foundation
 
 class PicturesInterpreter: NetworkResponseInterpreter {
     
-    func interpret(data: Data?, response: HTTPURLResponse?, error: Error?, successStatusCode: Int) -> Response<[Picture], ResponseError> {
+    func interpret(data: Data?, response: HTTPURLResponse?, error: Error?, successStatusCode: Int) -> Result<[Picture], ResponseError> {
         
-        if let _ = error { return Response.error(ResponseError.connectionError) }
+        if let _ = error { return Result.failure(ResponseError.connectionError) }
         guard response?.statusCode == successStatusCode else {
-            return Response.error(ResponseError.invalidResponseError)
+            return Result.failure(ResponseError.invalidResponseError)
         }
-        guard let data = data else { return Response.error(ResponseError.invalidResponseError) }
+        guard let data = data else { return Result.failure(ResponseError.invalidResponseError) }
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
             let container = try decoder.singleValueContainer()
@@ -28,8 +28,8 @@ class PicturesInterpreter: NetworkResponseInterpreter {
             return dateFormatter.date(from: dateStr) ?? Date(timeIntervalSince1970: 0)
         })
         guard let response = try? decoder.decode([Picture].self, from: data) else {
-            return Response.error(ResponseError.decodeError)
+            return Result.failure(ResponseError.decodeError)
         }
-        return Response.success(response)
+        return Result.success(response)
     }
 }

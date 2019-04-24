@@ -13,7 +13,7 @@ protocol PictureControllerProtocol {
     var numberOfElements: Int { get }
     var pictures: [Picture] { get }
 
-    func pictures(offset: Int, userName: String, pictureType: PictureType, handler: @escaping (Response<[Picture], ResponseError>) -> ())
+    func pictures(offset: Int, userName: String, pictureType: PictureType, handler: @escaping (Result<[Picture], ResponseError>) -> ())
     func clearCahe()
 }
 
@@ -28,7 +28,7 @@ class PictureController: PictureControllerProtocol {
         self.connection = connection
     }
     
-    func pictures(offset: Int, userName: String, pictureType: PictureType, handler: @escaping (Response<[Picture], ResponseError>) -> ()) {
+    func pictures(offset: Int, userName: String, pictureType: PictureType, handler: @escaping (Result<[Picture], ResponseError>) -> ()) {
         
         let request = PicturesRequest(offset: offset, number: numberOfElements, userName: userName, pictureType: pictureType)
         
@@ -38,8 +38,8 @@ class PictureController: PictureControllerProtocol {
             case .success(let pictures):
                 self.pictures += pictures
                 handler(.success(self.pictures))
-            case .error(let error):
-                handler(.error(error))
+            case .failure(let error):
+                handler(.failure(error))
             }
         }
     }

@@ -49,7 +49,7 @@ class PictureControllerTests: XCTestCase {
             switch resp {
             case .success(let responseData):
                 XCTAssertEqual(responseData, pictures1)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -59,7 +59,7 @@ class PictureControllerTests: XCTestCase {
             case .success(let responseData):
                 XCTAssertEqual(responseData.count, pictures1.count + pictures2.count)
                 XCTAssertEqual(responseData, pictures1 + pictures2)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -73,7 +73,7 @@ class PictureControllerTests: XCTestCase {
             switch resp {
             case .success(_):
                 XCTFail()
-            case .error(let error):
+            case .failure(let error):
                 XCTAssertEqual(error, ResponseError.invalidResponseError)
             }
         }
@@ -87,7 +87,7 @@ class PictureControllerTests: XCTestCase {
             switch resp {
             case .success(_):
                 XCTFail()
-            case .error(let error):
+            case .failure(let error):
                 XCTAssertEqual(error, ResponseError.invalidResponseError)
             }
         }

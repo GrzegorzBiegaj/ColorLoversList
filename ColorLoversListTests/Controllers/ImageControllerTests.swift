@@ -23,7 +23,7 @@ class ImageControllerTests: XCTestCase {
             switch resp {
             case .success(let respImage):
                 XCTAssertEqual(respImage.size, image.size)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -37,7 +37,7 @@ class ImageControllerTests: XCTestCase {
             switch resp {
             case .success(_):
                 XCTFail()
-            case .error(let error):
+            case .failure(let error):
                 XCTAssertEqual(error, ResponseError.invalidResponseError)
             }
         }
@@ -51,7 +51,7 @@ class ImageControllerTests: XCTestCase {
             switch resp {
             case .success(_):
                 XCTFail()
-            case .error(let error):
+            case .failure(let error):
                 XCTAssertEqual(error, ResponseError.invalidResponseError)
             }
         }

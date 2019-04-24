@@ -19,15 +19,15 @@ class LoversListTableVM {
         self.loverController = loverController
     }
 
-    func fetchEntries(handler: @escaping (Response<[Lover], ResponseError>) -> ()) {
+    func fetchEntries(handler: @escaping (Result<[Lover], ResponseError>) -> ()) {
         loverController.lovers(offset: listOffset) { (response) in
             switch response {
             case .success(let lovers):
                 self.listOffset += self.loverController.numberOfElements
                 self.lovers = lovers
                 handler(.success(self.lovers))
-            case .error(let error):
-                handler(.error(error))
+            case .failure(let error):
+                handler(.failure(error))
             }
         }
     }

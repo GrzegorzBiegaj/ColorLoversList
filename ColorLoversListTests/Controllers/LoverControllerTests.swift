@@ -35,7 +35,7 @@ class LoverControllerTests: XCTestCase {
             switch resp {
             case .success(let responseData):
                 XCTAssertEqual(responseData, lovers1)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -45,7 +45,7 @@ class LoverControllerTests: XCTestCase {
             case .success(let responseData):
                 XCTAssertEqual(responseData.count, lovers1.count + lovers2.count)
                 XCTAssertEqual(responseData, lovers1 + lovers2)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -59,7 +59,7 @@ class LoverControllerTests: XCTestCase {
             switch resp {
             case .success(_):
                 XCTFail()
-            case .error(let error):
+            case .failure(let error):
                 XCTAssertEqual(error, ResponseError.invalidResponseError)
             }
         }
@@ -73,7 +73,7 @@ class LoverControllerTests: XCTestCase {
             switch resp {
             case .success(_):
                 XCTFail()
-            case .error(let error):
+            case .failure(let error):
                 XCTAssertEqual(error, ResponseError.connectionError)
             }
         }

@@ -52,7 +52,7 @@ class PictureVC: UIViewController {
                     case .success(let image):
                         self.showImage(image: image, frame: frame)
                         
-                    case .error(_): break
+                    case .failure(_): break
                     }
                 })
             }

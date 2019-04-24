@@ -13,14 +13,14 @@ class LoversListTableVMTests: XCTestCase {
 
     func testFetchEntriesError() {
 
-        let loverController = LoverControllerMock(response: Response.error(.invalidResponseError))
+        let loverController = LoverControllerMock(response: Result.failure(.invalidResponseError))
         let viewModel = LoversListTableVM(loverController: loverController)
 
         viewModel.fetchEntries { response in
             switch response {
             case .success(_):
                 XCTFail()
-            case .error(let error):
+            case .failure(let error):
                 XCTAssertEqual(error, ResponseError.invalidResponseError)
             }
         }
@@ -30,7 +30,7 @@ class LoversListTableVMTests: XCTestCase {
 
         let lovers = [Lover(userName: "Etienne", numColors: 100, numPalettes: 23, numPatterns: 198, rating: 1000),
                        Lover(userName: "Jean", numColors: 12, numPalettes: 78, numPatterns: 300, rating: 900)]
-        let loverController = LoverControllerMock(response: Response.success(lovers))
+        let loverController = LoverControllerMock(response: Result.success(lovers))
         let viewModel = LoversListTableVM(loverController: loverController)
 
         XCTAssertEqual(viewModel.listOffset, 0)
@@ -39,7 +39,7 @@ class LoversListTableVMTests: XCTestCase {
             switch response {
             case .success(let lov):
                 XCTAssertEqual(lov, lovers)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -50,7 +50,7 @@ class LoversListTableVMTests: XCTestCase {
             switch response {
             case .success(let lov):
                 XCTAssertEqual(lov, lovers)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -65,13 +65,13 @@ class LoversListTableVMTests: XCTestCase {
 
         let lovers = [Lover(userName: "Etienne", numColors: 100, numPalettes: 23, numPatterns: 198, rating: 1000),
                       Lover(userName: "Jean", numColors: 12, numPalettes: 78, numPatterns: 300, rating: 900)]
-        let loverController = LoverControllerMock(response: Response.success(lovers))
+        let loverController = LoverControllerMock(response: Result.success(lovers))
         let viewModel = LoversListTableVM(loverController: loverController)
         viewModel.fetchEntries { response in
             switch response {
             case .success(let lov):
                 XCTAssertEqual(lov, lovers)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -85,13 +85,13 @@ class LoversListTableVMTests: XCTestCase {
         let lovers = [Lover(userName: "Etienne", numColors: 100, numPalettes: 23, numPatterns: 198, rating: 1000),
                       Lover(userName: "Jean", numColors: 12, numPalettes: 78, numPatterns: 300, rating: 900),
                       Lover(userName: nil, numColors: 12, numPalettes: 78, numPatterns: 300, rating: 900)]
-        let loverController = LoverControllerMock(response: Response.success(lovers))
+        let loverController = LoverControllerMock(response: Result.success(lovers))
         let viewModel = LoversListTableVM(loverController: loverController)
         viewModel.fetchEntries { response in
             switch response {
             case .success(let lov):
                 XCTAssertEqual(lov, lovers)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -109,13 +109,13 @@ class LoversListTableVMTests: XCTestCase {
                       Lover(userName: "Test3", numColors: nil, numPalettes: 78, numPatterns: 300, rating: 900),
                       Lover(userName: "Test4", numColors: 12, numPalettes: nil, numPatterns: 300, rating: 900),
                       Lover(userName: "Test5", numColors: 12, numPalettes: 78, numPatterns: nil, rating: 900)]
-        let loverController = LoverControllerMock(response: Response.success(lovers))
+        let loverController = LoverControllerMock(response: Result.success(lovers))
         let viewModel = LoversListTableVM(loverController: loverController)
         viewModel.fetchEntries { response in
             switch response {
             case .success(let lov):
                 XCTAssertEqual(lov, lovers)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -131,7 +131,7 @@ class LoversListTableVMTests: XCTestCase {
 
         let lovers = [Lover(userName: "Etienne", numColors: 100, numPalettes: 23, numPatterns: 198, rating: 1000),
                       Lover(userName: "Jean", numColors: 12, numPalettes: 78, numPatterns: 300, rating: 900)]
-        let loverController = LoverControllerMock(response: Response.success(lovers))
+        let loverController = LoverControllerMock(response: Result.success(lovers))
         let viewModel = LoversListTableVM(loverController: loverController)
         viewModel.fetchEntries { response in
             switch response {
@@ -142,7 +142,7 @@ class LoversListTableVMTests: XCTestCase {
                 XCTAssertEqual(viewModel.numberOfPictures(lover: lov[0], pictureType: .palette), 23)
                 XCTAssertEqual(viewModel.numberOfPictures(lover: nil, pictureType: .pattern), 0)
                 XCTAssertEqual(viewModel.numberOfPictures(lover: lov[0], pictureType: nil), 0)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }

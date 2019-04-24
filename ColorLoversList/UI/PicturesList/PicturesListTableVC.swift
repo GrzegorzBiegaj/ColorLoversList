@@ -49,7 +49,7 @@ class PicturesListTableVC: UITableViewController {
                 switch response {
                 case .success(_):
                     self.tableView.reloadData()
-                case .error(let error):
+                case .failure(let error):
                     self.showAlert(withTitle: "Error", message: error.errorDescription)
                     print ("Error: \(error)")
                 }

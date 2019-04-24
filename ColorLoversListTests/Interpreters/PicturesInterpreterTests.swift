@@ -46,7 +46,7 @@ class PicturesInterpreterTests: XCTestCase {
         switch resp {
         case .success(let data):
             XCTAssertEqual(data, pictures)
-        case .error(_):
+        case .failure(_):
             XCTFail()
         }
     }
@@ -60,7 +60,7 @@ class PicturesInterpreterTests: XCTestCase {
         switch resp {
         case .success(_):
             XCTFail()
-        case .error(let responseError):
+        case .failure(let responseError):
             XCTAssertEqual(responseError, ResponseError.invalidResponseError)
         }
     }
@@ -76,7 +76,7 @@ class PicturesInterpreterTests: XCTestCase {
         switch resp {
         case .success(_):
             XCTFail()
-        case .error(let responseError):
+        case .failure(let responseError):
             XCTAssertEqual(responseError, ResponseError.connectionError)
         }
     }

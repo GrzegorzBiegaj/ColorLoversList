@@ -13,14 +13,14 @@ class PicturesListTableVMTests: XCTestCase {
     
     func testFetchEntriesError() {
 
-        let pictureController = PictureControllerMock(response: Response.error(.invalidResponseError))
+        let pictureController = PictureControllerMock(response: Result.failure(.invalidResponseError))
         let viewModel = PicturesListTableVM(pictureController: pictureController)
 
         viewModel.fetchEntries(userName: "test", pictureType: .color) { response in
             switch response {
             case .success(_):
                 XCTFail()
-            case .error(let error):
+            case .failure(let error):
                 XCTAssertEqual(error, ResponseError.invalidResponseError)
             }
         }
@@ -35,7 +35,7 @@ class PicturesListTableVMTests: XCTestCase {
         let pictures = [Picture(title: "test1", dateCreated: date, imageUrl: "imageUrl", numVotes: 123),
                         Picture(title: "test2", dateCreated: date, imageUrl: "imageUrl2", numVotes: 1000)]
 
-        let pictureController = PictureControllerMock(response: Response.success(pictures))
+        let pictureController = PictureControllerMock(response: Result.success(pictures))
         let viewModel = PicturesListTableVM(pictureController: pictureController)
         viewModel.numberOfPictures = pictures.count
 
@@ -45,7 +45,7 @@ class PicturesListTableVMTests: XCTestCase {
             switch response {
             case .success(let pic):
                 XCTAssertEqual(pic, pictures)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -57,7 +57,7 @@ class PicturesListTableVMTests: XCTestCase {
             switch response {
             case .success(let pic):
                 XCTAssertEqual(pic, pictures)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -77,7 +77,7 @@ class PicturesListTableVMTests: XCTestCase {
         let pictures = [Picture(title: "test1", dateCreated: date, imageUrl: "imageUrl", numVotes: 123),
                         Picture(title: "test2", dateCreated: date, imageUrl: "imageUrl2", numVotes: 1000)]
 
-        let pictureController = PictureControllerMock(response: Response.success(pictures), numberOfElements: 2)
+        let pictureController = PictureControllerMock(response: Result.success(pictures), numberOfElements: 2)
         let viewModel = PicturesListTableVM(pictureController: pictureController)
         viewModel.numberOfPictures = 10
 
@@ -87,7 +87,7 @@ class PicturesListTableVMTests: XCTestCase {
             switch response {
             case .success(let pic):
                 XCTAssertEqual(pic, pictures)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -104,7 +104,7 @@ class PicturesListTableVMTests: XCTestCase {
         let pictures = [Picture(title: "test1", dateCreated: date, imageUrl: "imageUrl", numVotes: 123),
                         Picture(title: "test2", dateCreated: date, imageUrl: "imageUrl2", numVotes: 1000)]
 
-        let pictureController = PictureControllerMock(response: Response.success(pictures), numberOfElements: 2)
+        let pictureController = PictureControllerMock(response: Result.success(pictures), numberOfElements: 2)
         let viewModel = PicturesListTableVM(pictureController: pictureController)
         viewModel.numberOfPictures = 10
 
@@ -114,7 +114,7 @@ class PicturesListTableVMTests: XCTestCase {
             switch response {
             case .success(let pic):
                 XCTAssertEqual(pic, pictures)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }
@@ -132,7 +132,7 @@ class PicturesListTableVMTests: XCTestCase {
         let pictures = [Picture(title: "test1", dateCreated: date, imageUrl: "imageUrl", numVotes: 123),
                         Picture(title: "test2", dateCreated: date, imageUrl: "imageUrl2", numVotes: 1000)]
 
-        let pictureController = PictureControllerMock(response: Response.success(pictures), numberOfElements: 2)
+        let pictureController = PictureControllerMock(response: Result.success(pictures), numberOfElements: 2)
         let viewModel = PicturesListTableVM(pictureController: pictureController)
         viewModel.numberOfPictures = 10
 
@@ -142,7 +142,7 @@ class PicturesListTableVMTests: XCTestCase {
             switch response {
             case .success(let pic):
                 XCTAssertEqual(pic, pictures)
-            case .error(_):
+            case .failure(_):
                 XCTFail()
             }
         }

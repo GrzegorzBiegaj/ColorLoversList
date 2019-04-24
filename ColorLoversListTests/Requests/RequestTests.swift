@@ -31,7 +31,7 @@ class RequestTests: XCTestCase {
 
 class TestInterpreter: NetworkResponseInterpreter {
     
-    func interpret(data: Data?, response: HTTPURLResponse?, error: Error?, successStatusCode: Int) -> Response<[Lover], ResponseError> {
-        return Response.success([Lover(userName: "", numColors: 0, numPalettes: 0, numPatterns: 0, rating: 0)])
+    func interpret(data: Data?, response: HTTPURLResponse?, error: Error?, successStatusCode: Int) -> Result<[Lover], ResponseError> {
+        return Result.success([Lover(userName: "", numColors: 0, numPalettes: 0, numPatterns: 0, rating: 0)])
     }
 }
